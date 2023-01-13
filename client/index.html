@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Back End Assessment</title>
+  </head>
+  <body class="container">
+    <button id="complimentButton">Get a compliment</button>
+    <button id="fortuneButton">Get a fortune</button>
+    <div id="form-container">
+      <form id="task-form">
+        <label for="task-name">Task Name</label>
+        <input type="text" id="task-name" name="task-name">
+        <label for="description">Description</label>
+        <input type="text" id="task-description" name="description">
+        <label for="description">Priority</label>
+        <select name="priority" id="task-priority">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <button>Add Task</button>
+      </form>
+    </div>
+    <table id="tasks-container">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <!-- <tr>
+          <td>Task Name Here</td>
+          <td>Description Here</td>
+          <td>
+            <button>-</button>
+            2
+            <button>+</button>
+          </td>
+          <td>
+            <button>Delete</button>
+          </td>
+        </tr> -->
+      </tbody>
+    </table>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+    
+  </body>
+</html>
