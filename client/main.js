@@ -19,15 +19,20 @@ const getFortune = () => {
 };
 
 const updateTask = e => {
-    if (e.target.innerHTML === "-") {
-        console.log("minus");
-    } else if (e.target.innerHTML === "+") {
-        console.log("plus");
-    }
+    const taskID = e.target.parentNode.parentNode.id;
+    const type = e.target.getAttribute("type");
+
+    axios.put(`http://localhost:4000/api/task/${taskID}`, {type}).then(res => {
+        displayTasks(res.data);
+    });
 };
 
 const deleteTask = e => {
+    const taskRow = e.target.parentNode.parentNode;
 
+    axios.delete(`http://localhost:4000/api/task/${taskRow.id}`).then(() => {
+        taskRow.remove();
+    });
 };
 
 const addTask = (e) => {
@@ -79,21 +84,19 @@ const showTask = task => {
     plusBtn.addEventListener("click", updateTask);
     deleteBtn.addEventListener("click", deleteTask);
 
+    minusBtn.setAttribute("type", "minus");
+    plusBtn.setAttribute("type", "plus");
+
 
     tdPriority.appendChild(minusBtn);
     tdPriority.appendChild(prioritySpan);
     tdPriority.appendChild(plusBtn);
 
     tdDelete.appendChild(deleteBtn);
-    // tdPriority.innerHTML = `<button onclick"updateTask(${task.id}, 'minus')">-</button>
-    //     ${task.priority}
-    //     <button onclick="updateTask(${task.id}, 'plus')">+</button>`;
-
-    // tdDelete.appendChild(deleteBtn);
-    // tdDelete.innerHTML = `<button onclick"deleteTask(${task.id})">Delete</button>`;
     
     taskRow.append(tdName, tdDescription, tdPriority, tdDelete);
 
+    //// THIS WAS ADDING "updatetask" to minus button and "updateTask" to plus button. WHY??????////
     // const text = `
     // <td>${task.name}</td>
     // <td>${task.description}</td>

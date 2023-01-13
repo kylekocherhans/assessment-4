@@ -24,8 +24,6 @@ module.exports = {
     },
 
     addTask: (req, res) => {
-        console.log(req.body);
-
         const {name, description, priority} = req.body;
 
         const newTask = {
@@ -39,17 +37,48 @@ module.exports = {
 
         tasks.push(newTask);
 
+        console.log("Task Added");
+        console.log(tasks);
+
         res.status(200).send(tasks);
     },
 
     updateTask: (req, res) => {
-        console.log(req.body);
+        const {id} = req.params;
+        const {type} = req.body;
+        const getID = task => task.id === +id;
+        const index = tasks.findIndex(getID);
 
-        res.status(200).send(tasks);
+        if (index !== -1) {
+            if (type === "plus") {
+                if (tasks[index].priority < 4) {
+                    tasks[index].priority++;
+                }
+            } else if (type === "minus") {
+                if (tasks[index].priority > 1) {
+                    tasks[index].priority--;
+                }
+            }
+            console.log("Task Updated");
+            console.log(tasks[index]);
+            res.status(200).send(tasks);
+        } else {
+            res.status(404).send("Couldn't find a task with that id");
+        }
     },
 
     deleteTask: (req, res) => {
-        console.log(req.body);
+        const {id} = req.params;
+        const getID = task => task.id === +id;
+        const index = tasks.findIndex(getID);
+
+        if (index !== -1) {
+            tasks.splice(index, 1);
+            console.log("Task Deleted");
+            console.log(tasks);
+        } else {
+            res.status(404).send("Couldn't find a task with that id");
+        }
 
         res.status(200).send(tasks);
     }
