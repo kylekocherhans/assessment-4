@@ -37,19 +37,23 @@ const deleteTask = e => {
 
 const addTask = (e) => {
     e.preventDefault();
+    console.log(e);
 
-    const taskName = document.getElementById("task-name");
-    const taskDescription = document.getElementById("task-description");
-    const taskPriority = document.getElementById("task-priority");
+    const taskNameInput = document.getElementById("task-name");
+    const taskDescriptionInput = document.getElementById("task-description");
+    const taskPriorityInput = document.getElementById("task-priority");
 
     const task = {
-        name: taskName.value,
-        description: taskDescription.value,
-        priority: taskPriority.value
+        name: taskNameInput.value,
+        description: taskDescriptionInput.value,
+        priority: taskPriorityInput.value
     }
 
     axios.post("http://localhost:4000/api/task", task).then(res => {
         displayTasks(res.data);
+        taskNameInput.value = "";
+        taskDescriptionInput.value = "";
+        taskPriorityInput.value = 1;
     });
 };
 
@@ -87,7 +91,6 @@ const showTask = task => {
     minusBtn.setAttribute("type", "minus");
     plusBtn.setAttribute("type", "plus");
 
-
     tdPriority.appendChild(minusBtn);
     tdPriority.appendChild(prioritySpan);
     tdPriority.appendChild(plusBtn);
@@ -96,32 +99,17 @@ const showTask = task => {
     
     taskRow.append(tdName, tdDescription, tdPriority, tdDelete);
 
-    //// THIS WAS ADDING "updatetask" to minus button and "updateTask" to plus button. WHY??????////
-    // const text = `
-    // <td>${task.name}</td>
-    // <td>${task.description}</td>
-    // <td>
-    //     <button onclick"updateTask(${task.id}, 'minus')">-</button>
-    //     ${task.priority}
-    //     <button onclick="updateTask(${task.id}, 'plus')">+</button>
-    // </td>
-    // <td>
-    //     <button onclick"deleteTask(${task.id})">Delete</button>
-    // </td>`;
-    // taskRow.innerHTML = text;
-
     // taskRow.innerHTML = `
     //     <td>${task.name}</td>
     //     <td>${task.description}</td>
     //     <td>
-    //         <button onclick"updateTask(${task.id}, 'minus')">-</button>
+    //         <button onclick="updateTask(${task.id}, 'minus')">-</button>
     //         ${task.priority}
     //         <button onclick="updateTask(${task.id}, 'plus')">+</button>
     //     </td>
     //     <td>
-    //         <button onclick"deleteTask(${task.id})">Delete</button>
+    //         <button onclick="deleteTask(${task.id})">Delete</button>
     //     </td>`;
-        // console.log(taskRow);
 
     tableBody.appendChild(taskRow);
 };
