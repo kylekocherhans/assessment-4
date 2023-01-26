@@ -4,7 +4,7 @@ const addTaskForm = document.getElementById("task-form");
 const tableBody = document.getElementById("table-body");
 
 const getCompliment = () => {
-    axios.get("http://localhost:4000/api/compliment/")
+    axios.get("http://50.18.83.178/api/compliment/")
         .then(res => {
             const data = res.data;
             alert(data);
@@ -12,7 +12,7 @@ const getCompliment = () => {
 };
 
 const getFortune = () => {
-    axios.get("http://localhost:4000/api/fortune/").then(res => {
+    axios.get("http://50.18.83.178/api/fortune/").then(res => {
             const data = res.data;
             alert(data);
     });
@@ -22,7 +22,7 @@ const updateTask = e => {
     const taskID = e.target.parentNode.parentNode.id;
     const type = e.target.getAttribute("type");
 
-    axios.put(`http://localhost:4000/api/task/${taskID}`, {type}).then(res => {
+    axios.put(`http://50.18.83.178/api/task/${taskID}`, {type}).then(res => {
         displayTasks(res.data);
     });
 };
@@ -30,7 +30,7 @@ const updateTask = e => {
 const deleteTask = e => {
     const taskRow = e.target.parentNode.parentNode;
 
-    axios.delete(`http://localhost:4000/api/task/${taskRow.id}`).then(() => {
+    axios.delete(`http://50.18.83.178/api/task/${taskRow.id}`).then(() => {
         taskRow.remove();
     });
 };
@@ -49,7 +49,7 @@ const addTask = (e) => {
         priority: taskPriorityInput.value
     }
 
-    axios.post("http://localhost:4000/api/task", task).then(res => {
+    axios.post("http://50.18.83.178/api/task", task).then(res => {
         displayTasks(res.data);
         taskNameInput.value = "";
         taskDescriptionInput.value = "";
