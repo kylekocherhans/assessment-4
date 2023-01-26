@@ -44,8 +44,8 @@ module.exports = {
 
             const newTask = {
                 id: globalID,
-                taskName,
-                taskDescription,
+                name: taskName,
+                description: taskDescription,
                 priority: +priority
             }
     
