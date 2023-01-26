@@ -37,10 +37,10 @@ module.exports = {
     addTask: (req, res) => {
         const {name, description, priority} = req.body;
 
-        taskName = name.trim();
+        let taskName = name.trim();
         
         if (taskName) {
-            taskDescription = description.trim();
+            let taskDescription = description.trim();
 
             const newTask = {
                 id: globalID,
