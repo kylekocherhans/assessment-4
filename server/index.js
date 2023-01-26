@@ -7,7 +7,7 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/../public`));
 
 const { getCompliment, getFortune, addTask, updateTask, deleteTask } = require('./controller')
 
