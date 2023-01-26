@@ -37,21 +37,30 @@ module.exports = {
     addTask: (req, res) => {
         const {name, description, priority} = req.body;
 
-        const newTask = {
-            id: globalID,
-            name,
-            description,
-            priority: +priority
+        name = name.trim();
+        
+        if (name) {
+            description = description.trim();
+
+            const newTask = {
+                id: globalID,
+                name,
+                description,
+                priority: +priority
+            }
+    
+            globalID++;
+    
+            tasks.push(newTask);
+    
+            console.log("Task Added");
+            console.log(tasks);
+    
+            res.status(200).send(tasks);
+        } else {
+            rollbar.warning(`Add Task - someone tried adding task with no name`);
+            res.status(404).send("Can't add a task with no name");
         }
-
-        globalID++;
-
-        tasks.push(newTask);
-
-        console.log("Task Added");
-        console.log(tasks);
-
-        res.status(200).send(tasks);
     },
 
     updateTask: (req, res) => {
@@ -74,7 +83,7 @@ module.exports = {
             console.log(tasks[index]);
             res.status(200).send(tasks);
         } else {
-            rollbar.warning(`Delete Task: couldn't find task with id ${id}`);
+            rollbar.warning(`Update Task - couldn't find task with id: ${id}`);
             res.status(404).send("Couldn't find a task with that id");
         }
     },
@@ -89,6 +98,7 @@ module.exports = {
             console.log("Task Deleted");
             console.log(tasks);
         } else {
+            rollbar.warning(`Delete Task - couldn't find task with id: ${id}`);
             res.status(404).send("Couldn't find a task with that id");
         }
 
