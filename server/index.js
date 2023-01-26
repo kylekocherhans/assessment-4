@@ -9,6 +9,17 @@ app.use(express.json());
 
 app.use(express.static(`${__dirname}/../public`));
 
+// include and initialize the rollbar library with your access token
+var Rollbar = require('rollbar');
+var rollbar = new Rollbar({
+    accessToken: '27d44a2eb1cb48959dd414df57fdcd31',
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+});
+
+// record a generic message and send it to Rollbar
+rollbar.log('It\'s working!');
+
 const { getCompliment, getFortune, addTask, updateTask, deleteTask } = require('./controller')
 
 app.get("/api/compliment", getCompliment);
