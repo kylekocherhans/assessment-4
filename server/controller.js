@@ -74,6 +74,7 @@ module.exports = {
             console.log(tasks[index]);
             res.status(200).send(tasks);
         } else {
+            rollbar.warning(`Delete Task: couldn't find task with id ${id}`);
             res.status(404).send("Couldn't find a task with that id");
         }
     },
