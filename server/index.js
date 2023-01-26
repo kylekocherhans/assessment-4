@@ -20,10 +20,11 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('It\'s working!');
 
-const { getCompliment, getFortune, addTask, updateTask, deleteTask } = require('./controller')
+const { getCompliment, getFortune, addTask, updateTask, deleteTask, getStudents } = require('./controller')
 
 app.get("/api/compliment", getCompliment);
 app.get("/api/fortune", getFortune);
+app.get('/api/students', getStudents);
 app.post("/api/task", addTask);
 app.put("/api/task/:id", updateTask);
 app.delete("/api/task/:id", deleteTask);

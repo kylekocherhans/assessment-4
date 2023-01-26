@@ -81,5 +81,16 @@ module.exports = {
         }
 
         res.status(200).send(tasks);
+    },
+
+    getStudents: (req, res) => {
+        try {
+            rollbar.info(`Calling function that doesn't exist.`);
+            functionThatDoesntExist();
+        } catch (err) {
+            console.log(err)
+            rollbar.error(err);
+        }
+        
     }
 };
