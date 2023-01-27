@@ -37,7 +37,6 @@ const deleteTask = e => {
 
 const addTask = (e) => {
     e.preventDefault();
-    console.log(e);
 
     const taskNameInput = document.getElementById("task-name");
     const taskDescriptionInput = document.getElementById("task-description");

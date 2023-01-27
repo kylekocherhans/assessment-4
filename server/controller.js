@@ -59,7 +59,7 @@ module.exports = {
             res.status(200).send(tasks);
         } else {
             rollbar.warning(`Add Task - someone tried adding task with no name`);
-            res.status(404).send("Can't add a task with no name");
+            res.status(400).send("Can't add a task with no name");
         }
     },
 
